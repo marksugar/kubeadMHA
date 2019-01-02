@@ -1,0 +1,20 @@
+# ipvs
+modprobe ip_vs && modprobe ip_vs_rr && modprobe ip_vs_wrr && modprobe ip_vs_sh
+cat > /etc/modules <  EOF
+ip_vs_rr
+ip_vs_wrr
+ip_vs_sh
+ip_vs
+EOF
+# off swap
+swapoff -a
+# iptables
+echo "1" > /proc/sys/net/bridge/bridge-nf-call-iptables
+# net.ipv4.conf.all.rp_filter=1
+if [ `awk '/net.ipv4.conf.all.rp_filter/' /etc/sysctl.conf|wc -l` -lt 1 ]; then 
+   echo "net.ipv4.conf.all.rp_filter=1" >> /etc/sysctl.conf
+fi
+    
+if [ `grep DNS1 /etc/sysconfig/network-scripts/ifcfg-eth0|wc -l` -ge 1 ]; then 
+  sed 's/net.ipv4.conf.all.rp_filter=.*/net.ipv4.conf.all.rp_filte=1/g' /etc/sysctl.conf   
+fi	
