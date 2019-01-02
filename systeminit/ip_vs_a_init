@@ -17,6 +17,6 @@ if [ `awk '/net.ipv4.conf.all.rp_filter/' /etc/sysctl.conf|wc -l` -lt 1 ]; then
    echo "net.ipv4.conf.all.rp_filter=1" >> /etc/sysctl.conf
 fi
     
-if [ `grep DNS1 /etc/sysconfig/network-scripts/ifcfg-eth0|wc -l` -ge 1 ]; then 
+if [ `awk '/net.ipv4.conf.all.rp_filter/' /etc/sysctl.conf|wc -l` -ge 1 ]; then 
   sed 's/net.ipv4.conf.all.rp_filter=.*/net.ipv4.conf.all.rp_filte=1/g' /etc/sysctl.conf   
 fi
