@@ -1,0 +1,11 @@
+
+echo $(ip addr show eth0 | grep -Po 'inet \K[\d.]+'|awk -F. '{print $0}') > /etc/hostname
+
+CHOSTNAME=node-$(echo `sed 's@\.@-@g' /etc/hostname`).k8s.org
+CHOSTNAME_pretty='k8s node'
+sysctl -w kernel.hostname=$CHOSTNAME
+hostnamectl set-hostname $CHOSTNAME --static
+hostnamectl set-hostname "$CHOSTNAME_pretty" --pretty
+sysctl kernel.hostname=$CHOSTNAME
+
+echo -e "\033[31m\033[01m[ `hostnamectl` ]\033[0m"
