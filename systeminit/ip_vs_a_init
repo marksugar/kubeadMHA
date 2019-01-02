@@ -1,3 +1,5 @@
+sed -i '/-A INPUT -j REJECT/i\-A INPUT -p tcp -m tcp -m state --state NEW -m multiport --dports 10250 -m comment --comment "k8s" -j ACCEPT' /etc/sysconfig/iptables
+systemctl restart  iptables.service docker.service
 # ipvs
 modprobe ip_vs && modprobe ip_vs_rr && modprobe ip_vs_wrr && modprobe ip_vs_sh
 cat > /etc/modules <  EOF
@@ -17,4 +19,4 @@ fi
     
 if [ `grep DNS1 /etc/sysconfig/network-scripts/ifcfg-eth0|wc -l` -ge 1 ]; then 
   sed 's/net.ipv4.conf.all.rp_filter=.*/net.ipv4.conf.all.rp_filte=1/g' /etc/sysctl.conf   
-fi	
+fi
