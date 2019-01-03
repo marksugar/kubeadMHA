@@ -1,4 +1,4 @@
-
+# by www.linuxea.com
 echo $(ip addr show eth0 | grep -Po 'inet \K[\d.]+'|awk -F. '{print $0}') > /etc/hostname
 
 CHOSTNAME=node-$(echo `sed 's@\.@-@g' /etc/hostname`).k8s.org
