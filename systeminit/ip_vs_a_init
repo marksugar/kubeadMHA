@@ -1,5 +1,6 @@
-sed -i '/-A INPUT -j REJECT/i\-A INPUT -p tcp -m tcp -m state --state NEW -m multiport --dports 10250 -m comment --comment "k8s" -j ACCEPT' /etc/sysconfig/iptables
-systemctl restart  iptables.service docker.service
+#sed -i '/-A INPUT -j REJECT/i\-A INPUT -p tcp -m tcp -m state --state NEW -m multiport --dports 10250 -m comment --comment "k8s" -j ACCEPT' /etc/sysconfig/iptables
+#systemctl restart  iptables.service docker.service
+systemctl stop iptables.service
 # ipvs
 modprobe ip_vs && modprobe ip_vs_rr && modprobe ip_vs_wrr && modprobe ip_vs_sh
 cat > /etc/modules <<  EOF
