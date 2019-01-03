@@ -1,3 +1,4 @@
+# by www.linuxea.com
 #sed -i '/-A INPUT -j REJECT/i\-A INPUT -p tcp -m tcp -m state --state NEW -m multiport --dports 10250 -m comment --comment "k8s" -j ACCEPT' /etc/sysconfig/iptables
 #systemctl restart  iptables.service docker.service
 systemctl stop iptables.service
