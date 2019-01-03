@@ -1,4 +1,6 @@
-# kubeadMHA
+## kubeadMHA
+
+![img](https://raw.githubusercontent.com/marksugar/kubeadMHA/master/img/k8sga.png)
 
 
 curl -Lk https://raw.githubusercontent.com/marksugar/kubeadMHA/master/systeminit/profile -o /etc/profile
