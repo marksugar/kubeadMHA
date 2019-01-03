@@ -7,5 +7,9 @@ sysctl -w kernel.hostname=$CHOSTNAME
 hostnamectl set-hostname $CHOSTNAME --static
 hostnamectl set-hostname "$CHOSTNAME_pretty" --pretty
 sysctl kernel.hostname=$CHOSTNAME
-
+echo "DHCP_HOSTNAME=${CHOSTNAME}" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+reset
 echo -e "\033[31m\033[01m[ `hostnamectl` ]\033[0m"
+echo  -e "\033[31m\033[01m[  !!! After 5s rebbot ]\033[0m"
+sleep 5
+reboot
